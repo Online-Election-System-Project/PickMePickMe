@@ -40,7 +40,8 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = []
 
-PROJECT_APPS = ["promotion.apps.PromotionConfig"]
+PROJECT_APPS = ["promotion.apps.PromotionConfig",
+                "portfolio.apps.PortfolioConfig",]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 

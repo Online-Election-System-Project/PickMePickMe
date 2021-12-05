@@ -1,0 +1,9 @@
+{% extends 'promotion/base.html' %}
+
+{% block content %}
+    <div class="promotion">
+        <a class="btn btn-default" href="{% url 'promotion_edit' pk=promotion.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <h1>{{ promotion.title }}</h1>
+        <p>{{ promotion.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}

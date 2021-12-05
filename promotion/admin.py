@@ -1,16 +1,4 @@
 from django.contrib import admin
-from . import models
-# Register your models here.
+from .models import Promotion
 
-
-@admin.register(models.Promotion)
-class Promotion(admin.ModelAdmin):
-
-    list_display = (
-        "title",
-        "content",
-        "poster",
-        "candidate",
-        "election"
-    ) 
-    
+admin.site.register(Promotion)
