@@ -42,7 +42,11 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = []
 
-PROJECT_APPS = ["candidates.apps.CandidatesConfig", "elections.apps.ElectionsConfig"]
+PROJECT_APPS = [
+    "candidates.apps.CandidatesConfig",
+    "elections.apps.ElectionsConfig",
+    "users.apps.UsersConfig",
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
@@ -130,3 +134,6 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# User 모델 변경
+AUTH_USER_MODEL = "users.User"
