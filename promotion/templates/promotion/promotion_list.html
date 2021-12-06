@@ -1,0 +1,10 @@
+{% extends 'promotion/base.html' %}
+
+{% block content %} 
+  {% for promotion in promotions %}
+    <div>
+      <h1><a href="{% url 'promotion_detail' pk=promotion.pk %}">{{ promotion.title }}</a></h1>
+      <p>{{ promotion.text|linebreaksbr }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
