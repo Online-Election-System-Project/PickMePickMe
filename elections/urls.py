@@ -9,4 +9,6 @@ urlpatterns = [
         views.ElectionRegisterView.as_view(),
         name="election-register",
     ),
+    path("certification/", views.CertificationView, name="certification"),
+    path("videorecord/", views.VideoRecord, name="video-record"),
 ]
