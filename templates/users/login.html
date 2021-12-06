@@ -1,0 +1,15 @@
+<form method="POST" class="w-full" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% if form.non_field.errors %}
+        {% for error in form.non_field.errors %}
+            <span class="text-warning font_medium text-md-center">{{error}}</span>
+        {% endfor %}
+    {% endif %}
+
+    {% for field in form %}
+        {% include "users/form_input.html" with field=field %}
+    {% endfor %}
+
+    <button class="btn bg-warning text-white">login</button>
+</form>
