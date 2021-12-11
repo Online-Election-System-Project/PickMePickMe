@@ -71,4 +71,4 @@ def deleteUser(request):
     if request.method == "POST":
         user = request.user
         user.delete()
-        return redirect("users/login")
+        return redirect("users:login")

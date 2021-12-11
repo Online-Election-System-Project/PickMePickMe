@@ -6,4 +6,9 @@
         <h1>{{ promotion.title }}</h1>
         <p>{{ promotion.text|linebreaksbr }}</p>
     </div>
+    
+    {% if user.is_superuser %}
+        이 계정은 superuser입니다
+    {% endif %}
+
 {% endblock %}
