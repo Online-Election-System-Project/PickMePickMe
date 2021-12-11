@@ -57,7 +57,6 @@ class UpdateProfileView(UpdateView):
     )
     success_url = reverse_lazy("elections:election-register")
 
-
     def get_object(self, queryset=None):
         return self.request.user
 
@@ -66,3 +65,10 @@ class UpdateProfileView(UpdateView):
         form.fields["first_name"].widget.attrs = {"placeholder": "First name"}
         form.fields["last_name"].widget.attrs = {"placeholder": "Last name"}
         return form
+
+
+def deleteUser(request):
+    if request.method == "POST":
+        user = request.user
+        user.delete()
+        return redirect("users/login")
