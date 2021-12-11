@@ -32,7 +32,7 @@ class Promotion(models.Model):
     pledge = models.FileField(upload_to="pdf", blank=True)
 
     # 후보자 모델 생성? 그냥 유저 모델에서 역할만 부여?
-    candidate = models.CharField(max_length=10)
+    candidate = models.ForeignKey("users.User", on_delete=models.CASCADE)
 
     # 선거 모델 생성 후 연결 예정
     election = models.ForeignKey("elections.Election", on_delete=models.CASCADE)

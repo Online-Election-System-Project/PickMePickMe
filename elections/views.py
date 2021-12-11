@@ -62,3 +62,20 @@ def deleteElection(request, pk):
         election = models.Election.objects.get(pk=pk)
         election.delete()
         return redirect("elections/register")
+
+
+class ElectionResultView(DetailView):
+
+    """ElectionResultView Definition"""
+
+    def get(self, request, pk):
+        try:
+            election = models.Election.objects.get(pk=pk)
+        except models.Election.DoesNotExist:
+            raise Http404()
+
+        return render(
+            request,
+            "elections/election_result.html",
+            {"election": election, "elected": "문재인"},
+        )

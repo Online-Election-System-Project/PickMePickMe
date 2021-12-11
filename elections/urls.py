@@ -13,4 +13,5 @@ urlpatterns = [
     ),
     path("<int:pk>/edit/", views.EditElectionView.as_view(), name="edit-election"),
     path("<int:pk>/delete/", views.deleteElection, name="delete-election"),
+    path("<int:pk>/result/", views.ElectionResultView.as_view(), name="result")
 ]

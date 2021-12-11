@@ -153,3 +153,5 @@ cython_debug/
 
 # 기타 파일
 /pdf
+
+**/__pycache__/**
