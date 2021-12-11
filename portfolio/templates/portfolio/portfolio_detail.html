@@ -1,0 +1,9 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+    <div class="portfolio">
+        <a class="btn btn-default" href="{% url 'portfolio_edit' pk=portfolio.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <h1>{{ portfolio.title }}</h1>
+        <p>{{ portfolio.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}

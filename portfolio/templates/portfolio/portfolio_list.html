@@ -1,0 +1,11 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %} 
+  {% for portfolio in portfolios %}
+    <div>
+      <h1><a href="{% url 'portfolio_detail' pk=portfolio.pk %}">{{ portfolio.title }}</a></h1>
+      <p>published: {{ portfolio.published_date }}</p>
+      <p>{{ portfolio.text|linebreaksbr }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
