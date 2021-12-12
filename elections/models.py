@@ -22,3 +22,6 @@ class Election(models.Model):
     election_type = models.CharField(choices=TYPE_CHOICES, max_length=40, null=True)
     # election_area -> 라이브러리 사용해서 할지, 아니면 choice 사용해서 할지
     # candidate_list
+
+    def __str__(self):
+        return self.title

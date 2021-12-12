@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Title: {{ election.title }}</h1>
+
+  <p><strong>후보자 등록 기간 : </strong> {{ election.register_period_begin }} ~ {{ election.register_period_end}}</p>
+  <p><strong>선거 투표 기간 : </strong> {{ election.election_period_begin }} ~ {{ election.election_period_end }}</p>
+  <p><strong>선거 종류 :</strong> {{ election.election_type }}</p>
+ 
+{% endblock content %}

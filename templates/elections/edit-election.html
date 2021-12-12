@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="POST" class="w-full" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {% if form.non_field.errors %}
+        {% for error in form.non_field.errors %}
+        <span class="text-warning font_medium text-md-center">{{error}}</span>
+        {% endfor %}
+        {% endif %}
+        
+        {% for field in form %}
+        {% include "users/form_input.html" with field=field %}
+        {% endfor %}
+        
+        <button class="btn bg-warning text-white">선거 수정</button>
+    </form>
+    <form method="POST" action="{% url 'elections:delete-election' election.id %}">
+        {% csrf_token %}
+        <button class="btn-error">선거 삭제</button>
+    </form>
+{% endblock content %}
