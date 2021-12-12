@@ -26,6 +26,11 @@ class CustomUserAdmin(UserAdmin):
     )
 
     list_display = (
+        "username",
+        "first_name",
+        "last_name",
         "resident_registration_number",
         "gender",
+        "main_city",
+        "sub_city",
     )

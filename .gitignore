@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/django
 # Edit at https://www.toptal.com/developers/gitignore?templates=django
 
@@ -154,3 +153,5 @@ cython_debug/
 
 # 기타 파일
 /pdf
+
+**/__pycache__/**
