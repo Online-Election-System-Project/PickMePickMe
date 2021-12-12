@@ -11,4 +11,5 @@ urlpatterns = [
     ),
     path("certification/", views.CertificationView, name="certification"),
     path("videorecord/", views.VideoRecord, name="video-record"),
+    path("vote/", views.VoteView.as_view(), name="vote"),
 ]

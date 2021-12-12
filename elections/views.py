@@ -20,6 +20,20 @@ class ElectionRegisterView(FormView):
         return super().form_valid(form)
 
 
+class VoteView(FormView):
+    """
+    Vote View
+    """
+
+    template_name = "elections/vote.html"
+    form_class = forms.ElectionRegisterForm
+    success_url = reverse_lazy("elections:vote")
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
 def CertificationView(request):
     context = {}
 
