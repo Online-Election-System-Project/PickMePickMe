@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>본인확인</h1>
-<h1>Title: {{ election.title }}</h1>
+
 <table>
     <tr>
         <td with="50%">
@@ -11,6 +11,7 @@
         </td>
 
     </tr>
+
 </table>
-<a class="btn btn-default" href="{% url 'elections:vote' election.id %}">승인완료</a>
+<button type="button" onclick="location.href='http://127.0.0.1:8000/elections/vote'">본인확인 완료</button>
 {% endblock content %}

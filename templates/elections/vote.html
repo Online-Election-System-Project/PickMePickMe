@@ -2,15 +2,18 @@
 
 {% block content %}
 
-<h1>본인확인</h1>
-
-<table>
-    <tr>
-        <td with="50%">
-            <img src="http://127.0.0.1:8000/elections/videorecord/" style="width: 1000px;" />
-        </td>
-
-    </tr>
-</table>
-
+<h1>{{election.title}}</h1>
+{% for promotion in promotions %}
+<h1>{{promotion.symbol}}</h1>
+<h1>{{promotion.name_kor}}</h1>
+<h1>{{promotion.party}}</h1>
+{% endfor %}
+<form action="{% url 'elections:calculate' election.id %}" method="post">
+    {% csrf_token %}
+    {% for promotion in promotions %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{ promotion.name_kor}}">
+    <label for="choice{{ forloop.counter }}">{{promotion.name_kor}}</label><br>
+    {%endfor%}
+    <input type="submit" value="Vote">
+</form>
 {% endblock content %}

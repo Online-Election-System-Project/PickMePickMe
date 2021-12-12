@@ -37,6 +37,8 @@ class Promotion(models.Model):
     # 선거 모델 생성 후 연결 예정
     election = models.ForeignKey("elections.Election", on_delete=models.CASCADE)
 
+    vote_number = models.IntegerField(default=0)
+
     status = models.CharField(
         choices=STATUS_CHOICES, max_length=30, blank=True, null=True
     )

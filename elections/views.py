@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.decorators import gzip
 from django.http import StreamingHttpResponse
@@ -10,6 +11,8 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic.detail import DetailView
 
 from . import forms, models
+
+from promotion import models as promotions_model
 
 
 class ElectionListView(ListView):
@@ -91,19 +94,44 @@ class VoteView(FormView):
     Vote View
     """
 
-    template_name = "elections/vote.html"
-    form_class = forms.ElectionRegisterForm
-    success_url = reverse_lazy("elections:vote")
+    def get(self, request, pk):
+        try:
+            election = models.Election.objects.get(pk=pk)
+            promotions = promotions_model.Promotion.objects.filter(election=election.id)
+        except models.Election.DoesNotExist:
+            raise Http404()
+        return render(
+            request,
+            "elections/vote.html",
+            {"election": election, "promotions": promotions},
+        )
 
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+
+def Calculate(request, pk):
+    election = models.Election.objects.get(pk=pk)
+    promotions = promotions_model.Promotion.objects.filter(election=election.id)
+    try:
+        selected_choice = promotions.get(name_kor=request.POST["choice"])
+    except (KeyError,):
+        return render(
+            request,
+            "elections/vote.html",
+            {"election": election, "promotions": promotions},
+        )
+    else:
+        selected_choice.vote_number += 1
+        selected_choice.save()
+        return HttpResponseRedirect(reverse("elections:result", args=(election.id,)))
 
 
-def CertificationView(request):
+def CertificationView(request, pk):
+    election = models.Election.objects.get(pk=pk)
+    return render(request, "elections/certification.html", {"election": election})
+
+
+def CertificationAgentView(request):
     context = {}
-
-    return render(request, "elections/certification.html", context)
+    return render(request, "elections/certification_forAgent.html", context)
 
 
 class VideoCamera(object):
