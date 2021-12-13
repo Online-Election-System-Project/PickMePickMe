@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>투표가 성공적으로 처리 되었습니다</h3>
+<br>
+<a class="btn btn-default" href="{% url 'elections:elections' %}">선거 목록으로 돌아가기</a>
+{% endblock content %}
