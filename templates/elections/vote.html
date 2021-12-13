@@ -2,16 +2,22 @@
 
 {% block content %}
 
-<h1>{{election.title}}</h1>
-
+<h1>{{election.title}}</h1><br>
+<p><strong>본 서비스는 사용자의 투표 결과 및 개인 정보를 절대 저장하지 않습니다.</strong>
 <form action="{% url 'elections:calculate' election.id %}" method="post">
     {% csrf_token %}
     {% for promotion in promotions %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{ promotion.name_kor}}">
-    <label for="choice{{ forloop.counter }}">{{promotion.name_kor}}</label><br>
-    <h1>{{promotion.symbol}}</h1>
-    <h1>{{promotion.party}}</h1>
+    <p><strong>-------------------------------------------------------</p>
+    <div style="padding:0px 0px 0px 15px;font-size: 2em;">
+        <input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{ promotion.name_kor}}">
+        <label for="choice{{ forloop.counter }}">기호 {{promotion.symbol}}번 {{promotion.name_kor}}</label><br>
+        <h4>{{promotion.party}}</h4>
+    </div>
+
     {%endfor%}
-    <input type="submit" value="Vote">
+    <p><strong>-------------------------------------------------------</p><br>
+    <div style="padding:0px 0px 0px 30px;">
+        <input type="submit" value="Vote" style="height: 50px;width: 100px;">
+    </div>
 </form>
 {% endblock content %}
