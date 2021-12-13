@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, FormView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django.views.generic.detail import DetailView
+from promotion.models import Promotion
+import promotion
 
 from . import forms, models
 
@@ -55,6 +57,22 @@ class EditElectionView(UpdateView):
         if self.request.user.is_superuser == False:
             raise Http404()
         return election
+
+
+def acceptRequest(request, pk):
+    if request.method == "POST":
+        promotion = Promotion.objects.get(pk=pk)
+        promotion.status = Promotion.STATUS_ACCEPTED
+        promotion.save()
+    return redirect("promotion_detail", pk=pk)
+
+
+def rejectRequest(request, pk):
+    if request.method == "POST":
+        promotion = Promotion.objects.get(pk=pk)
+        promotion.status = Promotion.STATUS_REJECTED
+        promotion.save()
+    return redirect("promotion_detail", pk=pk)
 
 
 def deleteElection(request, pk):

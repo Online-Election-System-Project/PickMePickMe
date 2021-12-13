@@ -42,7 +42,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = []
 
 PROJECT_APPS = [
-    "candidates.apps.CandidatesConfig",
+    # "candidates.apps.CandidatesConfig",
     "elections.apps.ElectionsConfig",
     "users.apps.UsersConfig",
     "promotion.apps.PromotionConfig",

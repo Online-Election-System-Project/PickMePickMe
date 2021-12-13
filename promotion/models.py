@@ -1,9 +1,9 @@
 from django.db import models
 from elections import models as election_models
+from users.models import User
 
 
 class Promotion(models.Model):
-
     STATUS_WATING = "waiting"
     STATUS_ACCEPTED = "accepted"
     STATUS_REJECTED = "rejected"
@@ -13,11 +13,10 @@ class Promotion(models.Model):
         (STATUS_ACCEPTED, "승인 완료"),
         (STATUS_REJECTED, "거절됨"),
     )
-
     title = models.CharField(max_length=200, blank=False)
     text = models.TextField(blank=True, null=True)
-
     symbol = models.IntegerField(blank=True, null=True)
+
     party = models.CharField(max_length=100, blank=True)
     name_kor = models.CharField(max_length=100, blank=True)
     name_hanja = models.CharField(max_length=100, blank=True)
@@ -32,10 +31,12 @@ class Promotion(models.Model):
     pledge = models.FileField(upload_to="pdf", blank=True)
 
     # 후보자 모델 생성? 그냥 유저 모델에서 역할만 부여?
-    candidate = models.CharField(max_length=10)
 
     # 선거 모델 생성 후 연결 예정
-    election = models.ForeignKey("elections.Election", on_delete=models.CASCADE)
+    election = models.ForeignKey(
+        "elections.Election", on_delete=models.CASCADE, related_name="promotion"
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     status = models.CharField(
         choices=STATUS_CHOICES, max_length=30, blank=True, null=True

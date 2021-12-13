@@ -8,7 +8,15 @@
     </div>
     
     {% if user.is_superuser %}
-        이 계정은 superuser입니다
+        <p>현재상태 : {{ promotion.status }}</p>
+        <form method="POST" action="{% url 'elections:accept-request' promotion.id %}">
+            {% csrf_token %}
+            <button class="btn-error">승인</button>
+        </form>
+        <form method="POST" action="{% url 'elections:reject-request' promotion.id %}">
+            {% csrf_token %}
+            <button class="btn-error">거절</button>
+        </form>
     {% endif %}
 
 {% endblock %}
