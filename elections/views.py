@@ -10,6 +10,7 @@ from django.views.generic import ListView, FormView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django.views.generic.detail import DetailView
 
+from django.db.models import Max
 from . import forms, models
 
 from promotion import models as promotions_model
@@ -79,13 +80,21 @@ class ElectionResultView(DetailView):
     def get(self, request, pk):
         try:
             election = models.Election.objects.get(pk=pk)
+            promotions = promotions_model.Promotion.objects.filter(election=election.id)
+            max_promotion = promotions.order_by("-vote_number").first()
+     
         except models.Election.DoesNotExist:
             raise Http404()
 
         return render(
             request,
             "elections/election_result.html",
-            {"election": election, "elected": "문재인"},
+            {
+                "election": election,
+                "elected": "문재인",
+                "candidates": promotions,
+                "elected": max_promotion,
+            },
         )
 
 

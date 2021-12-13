@@ -1,6 +1,64 @@
-<div class="border">
+{% extends "base.html" %}
+{% block content %}
+<div>
+<div style="background: black; color:white">
+{{election.title}} 결과
 
-{{election.title}}
-
-<div>결과: {{elected}} 당선</div>
 </div>
+
+{% if elected %}
+    <div style=
+        "
+        margin-top: 50px;
+        margin-left: 10px;
+        font-weight: 600;
+        font-size: 25px;
+        text-align: left;
+        "
+    >당선을 축하합니다.
+    </div>
+
+    <div style="
+            margin-top: 10px;
+            text-align:center;
+            width: 500px; 
+            height: 50px;
+            margin-bottom: 50px; 
+            margin-left: 20px;
+            font-weight: 600; 
+            border: 1px solid; 
+            border-radius: 15px;
+            display: flex;"
+        >
+        <div style="margin:auto;">
+        <span>{{elected.party}}</span> 
+        <span>{{elected.candidate.first_name}} {{elected.candidate.last_name}} 후보</span>
+        </div>
+    </div>
+
+    <div style=
+        "
+        margin-top: 50px;
+        font-weight: 600;
+        margin-left: 10px;
+        font-size: 25px;
+
+        "
+    >전체 후보자 득표 정보</div>
+
+        {% for candidate in candidates %} 
+            
+            <div style="margin-bottom: 30px; margin-top: 10px; margin-left: 20px;">
+                <div> 기호: {{candidate.symbol}}번 </div>
+                <div>소속정당: {{candidate.party}} </div>
+                <div class="">이름: {{candidate.candidate.first_name}} {{candidate.candidate.last_name}} </div>
+
+                <div class="">득표 수:{{candidate.vote_number}}표</div>
+            </div>
+        {% endfor %}
+        {% else %}
+        <div style="margin-top: 25px;"> 현재 후보자가 없어요.</div>
+        {% endif %}
+</div>
+
+{% endblock content %}
