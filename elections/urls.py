@@ -13,11 +13,12 @@ urlpatterns = [
     ),
     path("<int:pk>/certification/", views.CertificationView, name="certification"),
     path(
-        "certification_for_agent/",
+        "<int:pk>/certification_for_agent/",
         views.CertificationAgentView,
         name="certification-for-agent",
     ),
     path("videorecord/", views.VideoRecord, name="video-record"),
+    path("done-voting/", views.DoneVoting, name="done-voting"),
     path("<int:pk>/vote/", views.VoteView.as_view(), name="vote"),
     path("<int:pk>/calculate/", views.Calculate, name="calculate"),
     path("<int:pk>/edit/", views.EditElectionView.as_view(), name="edit-election"),

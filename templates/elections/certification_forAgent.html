@@ -13,5 +13,8 @@
     </tr>
 
 </table>
-<button type="button" onclick="location.href='http://127.0.0.1:8000/elections/vote'">본인확인 완료</button>
+<form action="{% url 'elections:certification' pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="본인인증 완료">
+</form>
 {% endblock content %}

@@ -121,17 +121,32 @@ def Calculate(request, pk):
     else:
         selected_choice.vote_number += 1
         selected_choice.save()
-        return HttpResponseRedirect(reverse("elections:result", args=(election.id,)))
+        return HttpResponseRedirect(reverse("elections:done-voting"))
 
 
 def CertificationView(request, pk):
     election = models.Election.objects.get(pk=pk)
-    return render(request, "elections/certification.html", {"election": election})
+    promotions = promotions_model.Promotion.objects.filter(election=election.id)
+    if request.method == "POST":
+        return render(
+            request,
+            "elections/vote.html",
+            {"election": election, "promotions": promotions},
+        )
+    else:
+        return render(request, "elections/certification.html", {"election": election})
 
 
-def CertificationAgentView(request):
-    context = {}
+def CertificationAgentView(request, pk):
+    context = {
+        "pk": pk,
+    }
     return render(request, "elections/certification_forAgent.html", context)
+
+
+def DoneVoting(request):
+    context = {}
+    return render(request, "elections/vote-done.html", context)
 
 
 class VideoCamera(object):
