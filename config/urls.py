@@ -21,4 +21,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("elections/", include("elections.urls", namespace="elections")),
     path("users/", include("users.urls", namespace="users")),
+    path('', include('promotion.urls')),
+    path('', include('portfolio.urls')),
 ]

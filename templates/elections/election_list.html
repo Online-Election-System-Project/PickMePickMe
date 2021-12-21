@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+{% if object_list %}
+<ul>
+    <p>진행 중인 선거 목록</p>
+    {% for election in object_list %}
+    <li>
+        <a href="{% url 'elections:detail' election.pk %}">{{ election.title }}</a>
+        <a class="btn btn-default" href="{% url 'elections:result' election.id %}">투표 결과 확인하기</a>
+        
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>선거 목록이 없습니다</p>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{election.title}}</h1>
+
+<form action="{% url 'elections:calculate' election.id %}" method="post">
+    {% csrf_token %}
+    {% for promotion in promotions %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{ promotion.name_kor}}">
+    <label for="choice{{ forloop.counter }}">{{promotion.name_kor}}</label><br>
+    <h1>{{promotion.symbol}}</h1>
+    <h1>{{promotion.party}}</h1>
+    {%endfor%}
+    <input type="submit" value="Vote">
+</form>
+{% endblock content %}
